@@ -1,8 +1,10 @@
 import express from 'express';
+import cors from 'cors';
 
 // if it is exsiting node module, you don't need {}
 
 const server = express();
+server.use(cors());
 
 let jsonData = [{
     "albumId": 1,
