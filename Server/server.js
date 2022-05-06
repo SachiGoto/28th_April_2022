@@ -1,10 +1,116 @@
 import express from 'express';
+import mysql from 'mysql';
 import cors from 'cors';
+
+const db = mysql.createConnection({
+       host:'localhost',
+       port:8889,
+       user:'root',
+       password:'root',
+       database:'Employees'
+
+})
 
 // if it is exsiting node module, you don't need {}
 
 const server = express();
 server.use(cors());
+server.use(express.json());
+// This tells node to apply json format to all data
+
+db.connect(error=>{
+      // send an error if there is
+      if(error) console.log('Sorry cannot connect to db: ', error );
+      else console.log('Connected to mysql db');
+
+})
+
+
+
+server.get('/employeesapi', (req, res) =>{
+      // let allEmpSP = "SELECT*FROM Employee";
+      let allEmpSP = "CALL `All_Emp_Data`()";
+      db.query(allEmpSP, (error, data, fields)=>{
+          // three call back function , show an error is there is, otherwise take data
+          //write a quesry in " "
+           // "SELECT*FROM Employee"
+          // CALL `All_Emp_Data`()
+          if(error)
+            res.json({ErrorMessage: error
+              // console.log(error);
+             });        
+          else{
+            // res.json(data);
+            res.json(data[0]);
+            // console.log(data);
+          } 
+      }) 
+})
+
+
+server.get('/employeesapi/:id', (req, res)=>{
+       let emp_id = req.params.id;
+       let empSP = "CALL `Single_Emp_data`(?)";
+       // select statement// 
+       db.query(empSP, [emp_id], (error, data, fields)=>{
+           if(error){
+             res.json({ErrorMessage: error});
+
+           }else{
+             res.json(data[0]);
+           }
+       })
+
+});
+
+server.post('/signUp',(req,res)=>{
+  let email = req.body.email;
+  let password = req.body.password;
+  let user_name= req.body.user_name;
+  console.log("works");
+
+  let addNewUser = "CALL `newusers`(?, ?, ?);"
+  db.query(addNewUser, [user_name, email, password], (error, data, fields)=>{
+    if(error){
+      res.json({ErrorMessage:error});
+    }else{
+      res.json({
+        message:"Sign Up successful!",
+        signUp:true
+      })
+    }
+  })
+
+})
+
+
+server.post('/login', (req, res)=>{
+       let email = req.body.email;
+       let password = req.body.password;
+      //  db.query = "SELECT * FROM `users` WHERE users.email = `${emial}` AND users.password = `${password}`";
+
+      let loginQuery = 'CALL `login`(?, ?);'
+
+      db.query(loginQuery, [email, password], (error, data, fields)=>{
+        if(error){
+          res.json({ErrorMessage:error});
+        }else{
+          if(data[0].length === 0){
+            res.json({data:data[0], login: false, message: "Sorry, you have provided wrong credentials"})
+          }else{
+            res.json({
+              // data:data[0],
+              UserID:data[0].UserID, 
+              email:data[0].email, 
+              login: true, 
+              message: "Login successful"});
+              // create the Auth key
+          }
+        }
+      })
+
+
+})
 
 let jsonData = [{
     "albumId": 1,
@@ -70,6 +176,8 @@ let jsonData = [{
     "thumbnailUrl": "https://via.placeholder.com/150/51aa97"
   }]
 
+
+
   server.get('/photosapi', (req,res) =>{
          res.json(jsonData);
   })
@@ -88,6 +196,8 @@ let jsonData = [{
       // x is the temprary variable which indicates the objects in the json
       // This is where photoid passed from client is connected to jason id. 
   })
+
+
 server.listen(4400, function(){
     console.log('Server is successfully running on port 4400');
    

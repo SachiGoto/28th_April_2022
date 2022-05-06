@@ -1,5 +1,41 @@
-GET http://localhost:4400/photosapi
+@url = http://localhost:4400
+
+###
+GET {{url}}/photosapi
 
 ###
 
-GET http://localhost:4400/photosapi/7
+GET {{url}}/photosapi/7
+
+###
+
+GET {{url}}/employeesapi
+
+###
+
+GET {{url}}/employeesapi/2
+
+
+###
+
+POST {{url}}/login
+//Do not forget to add two lines
+Content-Type: application/json
+
+
+{
+    "email": "sachi@vanarts.com",
+    "password": "1"
+
+}
+
+###
+
+POST {{url}}/signUp
+Content-Type: application/json
+
+{
+    "user_name":"hello",
+    "email":"hello@gmail.com",
+    "password":"11111"
+}
