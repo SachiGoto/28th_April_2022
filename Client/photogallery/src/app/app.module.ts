@@ -9,6 +9,7 @@ import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { UpdateUSerComponent } from './update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     PhotoDetailsComponent,
     EmployeesComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    UpdateUSerComponent
   ],
   imports: [
     BrowserModule,

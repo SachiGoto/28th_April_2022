@@ -5,13 +5,15 @@ import { LoginComponent } from './login/login.component';
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
 import { PhotosComponent } from './photos/photos.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { UpdateUSerComponent } from './update-user/update-user.component';
 
 const routes: Routes = [
   {path:'photos', component:PhotosComponent},
   {path:'photos/:id', component:PhotoDetailsComponent},
   {path:'employees', component:EmployeesComponent},
   {path:'login', component:LoginComponent},
-  {path:'signUp', component:SignUpComponent}
+  {path:'signUp', component:SignUpComponent},
+  {path:'updateuser', component:UpdateUSerComponent}
 ];
 
 @NgModule({

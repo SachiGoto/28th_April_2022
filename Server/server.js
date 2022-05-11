@@ -84,6 +84,77 @@ server.post('/signUp',(req,res)=>{
 })
 
 
+// server.put('/updateUser', (req, res)=>{
+//   let userID = req.body.UserID;
+//   let email = req.body.email;
+//   let password = req.body.password;
+
+//   // those are three things receiving from the client 
+
+//   let query = "CALL `updateUser`(?, ?, ?);"
+
+//   db.query(query, [userID, email, password], (error, data, fields)=>{
+
+//    if(error){
+//      res.json({update:false, message:error});
+//    }else{
+//      res.json({update:true, message: "User successfully updated"});
+//      console.log(userID);
+//    }
+
+//   })
+// })
+
+server.put('/updateUser', (req, res) => {
+  let userID = req.body.id;
+  let email = req.body.email;
+  let password = req.body.password;
+  let query = "CALL `updateUser`(?, ?, ?)";
+  db.query(query, [userID, email, password], (error, data) => {
+    if(error){
+      res.json({ update: false, message: error });
+    }
+    else{
+      res.json({ update: true, message: "User successfully updated"});
+    }
+  })
+});
+
+server.get('/user/:id', (req, res)=>{
+     let userID = req.params.id;
+
+     let query =  "CALL `getUser`(?)"
+     db.query(query, [userID], (error, data)=>{
+       if(error){
+         res.json({user:false, message:error})
+       }else{
+         if(data[0].length === 0 ){
+           res.json({user:false, message:"No user with that ID exists"})
+         }else{
+           res.json({user:true, message:"User found", userData:data[0]});
+         }
+       }
+     })
+     // id comes from the url // 
+
+
+})
+
+// testing api 
+// server.post('/signup', (req, res)=>{
+//   // request should contain emaiil, passowrd, name
+//   let email = req.body.email;
+//   let password = req.body.password;
+//   let query = "CALL `newusers`(?, ?, ?)";
+//   db.query(query, [email, password], (error, data)=>{
+//        if(error){ res.json({ newuser:false, message: error })
+//   }else{
+//     res.json({newuser: true, message:"New user"})
+//   }
+
+// })
+
+
 server.post('/login', (req, res)=>{
        let email = req.body.email;
        let password = req.body.password;
@@ -102,6 +173,7 @@ server.post('/login', (req, res)=>{
               // data:data[0],
               UserID:data[0].UserID, 
               email:data[0].email, 
+              data:data[0],
               login: true, 
               message: "Login successful"});
               // create the Auth key

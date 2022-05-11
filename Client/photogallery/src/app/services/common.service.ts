@@ -4,6 +4,13 @@ import {HttpClient} from '@angular/common/http';
 interface Login{
   login:boolean;
   message:string;
+  data:[
+    {
+      UserID:number;
+      email:string;
+      password:string;
+    }
+  ]
 }
 
 @Injectable({
@@ -29,13 +36,39 @@ export class CommonService {
 
 
   private signUpURL = "http://localhost:4400/signUp";
+
   signUpService(user_name:string, email:string, password:string){
     let signUpBody={
       user_name:user_name,
       email: email,
-      password: password
+      password: password,
+      // signupmessage: message,
     }
 
-    return this.http.post<{message:string, signUp:boolean}>(this.signUpURL, signUpBody);
+    // This has to match with the object from the server
+    // this object will be sent to the server
+
+    return this.http.post<{message:any, signUp:boolean}>(this.signUpURL, signUpBody);
+    // this will be returned as observable
   }
+
+private userURL = "http://localhost:4400/user";
+
+getUser(id:any){
+  return this.http.get<{user: boolean, message:string, userData:[{ UserID:number, email:string, password:string}]}>(this.userURL + "/" + id);
+}
+
+
+private updateURL = "http://localhost:4400/updateUser";
+updateService(id:any, email:string, password:string){
+    let updateBody={
+      email: email,
+      password:password
+    }
+    // console.log(updateBody);
+    return this.http.put<{message:any,update:boolean}>(this.updateURL, updateBody);
+}
+
+
+
 }

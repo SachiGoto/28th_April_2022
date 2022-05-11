@@ -29,13 +29,36 @@ Content-Type: application/json
 
 }
 
+
 ###
 
 POST {{url}}/signUp
 Content-Type: application/json
+
 
 {
     "user_name":"hello",
     "email":"hello@gmail.com",
     "password":"11111"
 }
+
+
+###
+
+PUT {{url}}/updateUser 
+Content-Type: application/json
+
+{
+"UserID": 10,
+ "email": "test",
+  "password": "111111"
+}
+
+// names need to match with the names used for the database. 
+
+
+    
+
+###
+
+GET {{url}}/user/10

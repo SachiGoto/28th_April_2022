@@ -17,7 +17,7 @@ export class SignUpComponent implements OnInit {
    email:string='';
    password:string='';
    password2:string='';
-
+   signupmessage:any;
    registration:boolean=false;
 
    signUp(){
@@ -26,6 +26,8 @@ export class SignUpComponent implements OnInit {
             console.log(signUpData.signUp);
             this.registration = signUpData.signUp
     });
+
+
 
     //  console.log(this.user_name);
     //  console.log(this.email);
