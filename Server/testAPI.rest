@@ -49,9 +49,9 @@ PUT {{url}}/updateUser
 Content-Type: application/json
 
 {
-"UserID": 10,
- "email": "test",
-  "password": "111111"
+"UserID": "10",
+ "email": "hello@gmail.com",
+  "password": "9999999"
 }
 
 // names need to match with the names used for the database. 
@@ -61,4 +61,4 @@ Content-Type: application/json
 
 ###
 
-GET {{url}}/user/10
+GET {{url}}/user/12

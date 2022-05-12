@@ -60,8 +60,9 @@ getUser(id:any){
 
 
 private updateURL = "http://localhost:4400/updateUser";
-updateService(id:any, email:string, password:string){
+updateService(UserID:any, email:string, password:string){
     let updateBody={
+      UserID:UserID,
       email: email,
       password:password
     }

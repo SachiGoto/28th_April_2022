@@ -10,7 +10,7 @@ import { CommonService } from '../services/common.service';
 
 
 export class UpdateUSerComponent implements OnInit {
-  id = localStorage.getItem("photoUserID");
+  UserID = localStorage.getItem("photoUserID");
   email:string = '';
   password:string ='';
   updatestatus:Boolean = false;
@@ -21,8 +21,12 @@ export class UpdateUSerComponent implements OnInit {
 
    this.updatestatus = true;
 
-   this.cs.updateService(this.id, this.email, this.password).subscribe(updateData=>{
+   this.cs.updateService(this.UserID, this.email, this.password).subscribe(updateData=>{
      console.log("updateData has " , updateData);
+     console.log(this.email);
+     console.log(this.password);
+     console.log(this.UserID);
+
     //  console.log("works");
    })
 

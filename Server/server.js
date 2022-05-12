@@ -106,7 +106,7 @@ server.post('/signUp',(req,res)=>{
 // })
 
 server.put('/updateUser', (req, res) => {
-  let userID = req.body.id;
+  let userID = req.body.UserID;
   let email = req.body.email;
   let password = req.body.password;
   let query = "CALL `updateUser`(?, ?, ?)";
@@ -115,7 +115,13 @@ server.put('/updateUser', (req, res) => {
       res.json({ update: false, message: error });
     }
     else{
-      res.json({ update: true, message: "User successfully updated"});
+      if(data.affectedRows === 0){
+        res.json({ update: false, message: error });
+      }else{
+    
+      res.json({ update: true, message: "User successfully updated", data:data});
+      
+      }
     }
   })
 });
