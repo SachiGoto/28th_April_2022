@@ -22,8 +22,15 @@
 
 
   <button (click)="updateUser()">Update Details</button>
-  <div  *ngIf="updatestatus===true">Update successful</div>
-  <button *ngIf="updatestatus===true" routerLink="/photos">Click to see photos</button>
+  <button (click)="deleteUser()" class="btn btn-secondary">Delete</button>
+
+  <!-- <div  *ngIf="updatestatus===true">Update successful</div>
+  <button *ngIf="updatestatus===true" routerLink="/photos">Click to see photos</button> -->
+
+  <!-- [class.showMessage] -->
+
+  <div *ngIf="updatestatus"  [style.display]="showMessage">Your details are successfully updated</div>
+  <div *ngIf="!updatestatus" [style.display]="showMessage" class="errormessage d-none">Something went wrong. please try again.</div>
 <!--
   <div *ngIf="registration"> Sign up successful. <a routerLink="/login">Click here to log in.</a> </div>
   <div *ngIf="!registration">{{signupmessage}}</div> -->

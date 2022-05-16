@@ -11,6 +11,8 @@ const db = mysql.createConnection({
 
 })
 
+
+
 // if it is exsiting node module, you don't need {}
 
 const server = express();
@@ -18,12 +20,124 @@ server.use(cors());
 server.use(express.json());
 // This tells node to apply json format to all data
 
+
+
 db.connect(error=>{
       // send an error if there is
       if(error) console.log('Sorry cannot connect to db: ', error );
       else console.log('Connected to mysql db');
 
 })
+
+
+// CALL `deleteCrudData`(@p0);
+
+server.delete('/deletcrud/:id' , (req, res)=>{
+  let id = req.params.id;
+  let query = "CALL `deleteCrudData`(?)"
+  db.query(query, [id], (error, data)=>{
+    if(error){
+       res.json({deleteData:false, message:error});
+    }else{
+      res.json({deleteData: true, message:"User deleted successfully"})
+    }
+  })
+})
+
+
+
+// "CALL `crudDataById`(?)"
+
+server.get('/updateCrud/:id', (req, res)=>{
+  let id = req.params.id;
+  let dataById = "CALL `crudDataById`(?)";
+  // select statement// 
+  db.query(dataById, [id], (error, data, fields)=>{
+      if(error){
+        res.json({ErrorMessage: error});
+
+      }else{
+        res.json(data[0]);
+      }
+  })
+
+});
+
+server.put('/updateCrud', (req, res)=>{
+  let id= req.body.id;
+  let updateCrud = "CALL `updateCrudData`(?, ?)";
+  let input = req.body.input;
+
+  db.query(updateCrud,[id, input], (error, data)=>{
+    if(error){
+      res.json({ update: false, message: error });
+    }
+    else{
+      if(data.affectedRows === 0){
+        res.json({ update: false, message: "no affectedRows", data:data });
+      }else{
+    
+      res.json({ update: true, message: "User successfully updated", data:data});
+      
+      }
+    }
+
+  })
+})
+
+server.post('/newCrudData',(req, res)=>{
+  let input = req.body.input;
+  let newCrudData = "CALL `createCrudData`(?)";
+  db.query(newCrudData, [input], (error, data, fields)=>{
+    if(error) res.json({ErrorMessage: error});
+    else{
+      res.json({
+        message:"inserting new data was successful!",
+        newData:true})
+    }
+  })
+})
+
+
+server.get('/allCrudData',(req,res)=>{
+       let allCrudData = "CALL `All_crud_data`()";
+       db.query(allCrudData, (error, data, fields)=>{
+           
+        if(error)
+        res.json({ErrorMessage: error
+          // console.log(error);
+         });        
+      else{
+        // res.json(data);
+        res.json(data[0]);
+        // console.log(data);
+      } 
+
+
+
+       })
+})
+
+
+// let userID = req.body.UserID;
+// let email = req.body.email;
+// let password = req.body.password;
+// let query = "CALL `updateUser`(?, ?, ?)";
+// db.query(query, [userID, email, password], (error, data) => {
+//   if(error){
+//     res.json({ update: false, message: error });
+//   }
+//   else{
+//     if(data.affectedRows === 0){
+//       res.json({ update: false, message: error });
+//     }else{
+  
+//     res.json({ update: true, message: "User successfully updated", data:data});
+    
+//     }
+//   }
+// })
+
 
 
 
@@ -84,6 +198,19 @@ server.post('/signUp',(req,res)=>{
 })
 
 
+server.delete('/deleteuser/:id', (req, res)=>{
+  let UserID = req.params.id;
+  let query = "CALL `deleteUser`(?)";
+  db.query(query, [UserID], (error, data)=>{
+    if(error){
+       res.json({deleteUser:false, message:error});
+    }else{
+      res.json({deleteUser: true, message:"User deleted successfully"})
+    }
+  })
+})
+
+
 // server.put('/updateUser', (req, res)=>{
 //   let userID = req.body.UserID;
 //   let email = req.body.email;
@@ -104,7 +231,29 @@ server.post('/signUp',(req,res)=>{
 
 //   })
 // })
-
+// ----- old version 
+// creating an api end point
+// server.put('/updateUser', (req, res) => {
+//   let userID = req.body.UserID;
+//   let email = req.body.email;
+//   let password = req.body.password;
+//   let query = "CALL `updateUser`(?, ?, ?)";
+//   db.query(query, [userID, email, password], (error, data) => {
+//     if(error){
+//       res.json({ update: false, message: error });
+//     }
+//     else{
+//       if(data.affectedRows === 0){
+//         res.json({ update: false, message: error });
+//       }else{
+    
+//       res.json({ update: true, message: "User successfully updated", data:data});
+      
+//       }
+//     }
+//   })
+// });
+//------- new version ---------
 server.put('/updateUser', (req, res) => {
   let userID = req.body.UserID;
   let email = req.body.email;

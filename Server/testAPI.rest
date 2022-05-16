@@ -1,5 +1,50 @@
 @url = http://localhost:4400
 
+GET {{url}}/updateCrud/2
+
+
+
+
+###
+
+PUT {{url}}/updateCrud
+Content-Type: application/json
+
+{
+    "id":"2",
+    "input":"changed again"
+
+}
+
+###
+
+POST {{url}}/newCrudData
+Content-Type: application/json
+
+{
+    "input":"testing"
+}
+
+###
+GET {{url}}/allCrudData
+
+
+###
+POST {{url}}/updateCrud
+Content-Type: application/json
+
+
+{
+      "id": "1",
+    "input": "sachi@vanarts.com"
+  
+
+}
+
+
+
+
+
 ###
 GET {{url}}/photosapi
 
@@ -49,8 +94,8 @@ PUT {{url}}/updateUser
 Content-Type: application/json
 
 {
-"UserID": "10",
- "email": "hello@gmail.com",
+"UserID": "1",
+ "email": "test test",
   "password": "9999999"
 }
 
@@ -62,3 +107,8 @@ Content-Type: application/json
 ###
 
 GET {{url}}/user/12
+
+
+###
+
+DELETE {{url}}/deleteuser/10

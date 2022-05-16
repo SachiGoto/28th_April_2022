@@ -1,0 +1,33 @@
+label{
+  min-width:200px;
+}
+
+.container{
+  width:70vw;
+  margin:3rem auto;
+
+}
+
+.box{
+  min-width:50px;
+}
+
+// .showMessage{
+//   display:block;
+// }
+
+.btn{
+  margin-top:3rem;
+}
+
+
+table{
+  border-collapse:collapse;
+  border:1px solid black;
+}
+
+th, tr, td{
+  padding:1rem 4rem;
+  border:1px solid black;
+  text-align:center;
+}
