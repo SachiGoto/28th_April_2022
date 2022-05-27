@@ -4,3 +4,29 @@
   background-repeat:no-repeat;
   background-size:cover;
 }
+
+
+.svg{
+width:10px;
+}
+
+.image{
+  width:100%;
+}
+
+
+@keyframes fadeout{
+  from{
+       opacity:1;
+  }to{
+
+    opacity:0;
+
+  }
+}
+
+.fadeout{
+  animation: fadeout 2s forwards;
+}
+
+

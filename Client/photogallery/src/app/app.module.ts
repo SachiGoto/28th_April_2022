@@ -12,6 +12,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { UpdateUSerComponent } from './update-user/update-user.component';
 import { CrudComponent } from './crud/crud.component';
 import { EditComponent } from './edit/edit.component';
+import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EditComponent } from './edit/edit.component';
     SignUpComponent,
     UpdateUSerComponent,
     CrudComponent,
-    EditComponent
+    EditComponent,
+    PhotoGalleryComponent
   ],
   imports: [
     BrowserModule,

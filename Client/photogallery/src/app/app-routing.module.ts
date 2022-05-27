@@ -5,9 +5,11 @@ import { EditComponent } from './edit/edit.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
+import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
 import { PhotosComponent } from './photos/photos.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UpdateUSerComponent } from './update-user/update-user.component';
+
 
 const routes: Routes = [
   {path:'photos', component:PhotosComponent},
@@ -17,7 +19,8 @@ const routes: Routes = [
   {path:'signUp', component:SignUpComponent},
   {path:'updateuser', component:UpdateUSerComponent},
   {path:'crud', component:CrudComponent},
-  {path:'crud/:id', component:CrudComponent}
+  {path:'crud/:id', component:CrudComponent},
+  {path:'photoGallery', component:PhotoGalleryComponent}
 ];
 
 @NgModule({

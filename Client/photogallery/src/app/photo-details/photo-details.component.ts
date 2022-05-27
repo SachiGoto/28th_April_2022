@@ -22,14 +22,14 @@ export class PhotoDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // console.log(this.route.snapshot.paramMap.get("id"));
+    console.log(this.route.snapshot.paramMap.get("id"));
     // it will go though the route and look for an id;
     // this.photo = this.jsonData;
 
     let id:any= this.route.snapshot.paramMap.get("id");
 
     this.ps.getPhotoById(id).subscribe(photo =>{
-      this.photo = photo;
+      this.photo = photo.photo;
 
 
     })

@@ -1,114 +1,175 @@
 @url = http://localhost:4400
 
-GET {{url}}/updateCrud/2
 
 
+
+
+GET {{url}}/photos/12
 
 
 ###
+GET {{url}}/photos
 
-PUT {{url}}/updateCrud
+# GET {{url}}/updateCrud/2
+
+###
+
+POST {{url}}/photos
+// only to add data to the database
 Content-Type: application/json
 
+
 {
-    "id":"2",
-    "input":"changed again"
+    "albumId_fromC": 1,
+    "title_fromC": "spotify logo",
+    "url_fromC" : "spotify.png",
+    "tn_fromC": "tn_img1.jpg"
 
 }
 
-###
-
-POST {{url}}/newCrudData
-Content-Type: application/json
-
-{
-    "input":"testing"
-}
 
 ###
-GET {{url}}/allCrudData
+
+POST {{url}}/upload
+// uploading images to upload folder. 
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW  
+
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file_fromC"; filename="img1.jpg" 
+Content-Type: image/png
+
+< ./img1.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
 
 
 ###
-POST {{url}}/updateCrud
-Content-Type: application/json
+DELETE {{url}}/photos/27
 
 
-{
-      "id": "1",
-    "input": "sachi@vanarts.com"
+
+# POST {{url}}/upload
+# Content-Type: multipart/form-data; boundary=imageboundary
+
+# --imageboundary
+# Content-Disposition: form-data; name="file_fromC"; filename="img1.jpeg"
+# // the name file is the name assigned in the html 
+# Content-Type: img/jpg
+
+# < ./img1.jpeg
+# --imageboundary--
+
+
+
+
+
+
+# ###
+
+# PUT {{url}}/updateCrud
+# Content-Type: application/json
+
+# {
+#     "id":"2",
+#     "input":"changed again"
+
+# }
+
+# ###
+
+# POST {{url}}/newCrudData
+# Content-Type: application/json
+
+# {
+#     "input":"testing"
+# }
+
+# ###
+# GET {{url}}/allCrudData
+
+
+# ###
+# POST {{url}}/updateCrud
+# Content-Type: application/json
+
+
+# {
+#       "id": "1",
+#     "input": "sachi@vanarts.com"
   
 
-}
+# }
 
 
 
 
 
-###
-GET {{url}}/photosapi
+# ###
+# GET {{url}}/photosapi
 
-###
+# ###
 
-GET {{url}}/photosapi/7
+# GET {{url}}/photosapi/7
 
-###
+# ###
 
-GET {{url}}/employeesapi
+# GET {{url}}/employeesapi
 
-###
+# ###
 
-GET {{url}}/employeesapi/2
-
-
-###
-
-POST {{url}}/login
-//Do not forget to add two lines
-Content-Type: application/json
+# GET {{url}}/employeesapi/2
 
 
-{
-    "email": "sachi@vanarts.com",
-    "password": "1"
+# ###
 
-}
-
-
-###
-
-POST {{url}}/signUp
-Content-Type: application/json
+# POST {{url}}/login
+# //Do not forget to add two lines
+# Content-Type: application/json
 
 
-{
-    "user_name":"hello",
-    "email":"hello@gmail.com",
-    "password":"11111"
-}
+# {
+#     "email": "sachi@vanarts.com",
+#     "password": "1"
+
+# }
 
 
-###
+# ###
 
-PUT {{url}}/updateUser 
-Content-Type: application/json
+# POST {{url}}/signUp
+# Content-Type: application/json
 
-{
-"UserID": "1",
- "email": "test test",
-  "password": "9999999"
-}
 
-// names need to match with the names used for the database. 
+# {
+#     "user_name":"hello",
+#     "email":"hello@gmail.com",
+#     "password":"11111"
+# }
+
+
+# ###
+
+# PUT {{url}}/updateUser 
+# Content-Type: application/json
+
+# {
+# "UserID": "1",
+#  "email": "test test",
+#   "password": "9999999"
+# }
+
+# // names need to match with the names used for the database. 
 
 
     
 
-###
+# ###
 
-GET {{url}}/user/12
+# GET {{url}}/user/12
 
 
-###
+# ###
 
-DELETE {{url}}/deleteuser/10
+# DELETE {{url}}/deleteuser/10
