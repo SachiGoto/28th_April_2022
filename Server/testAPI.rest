@@ -4,7 +4,7 @@
 
 
 
-GET {{url}}/photos/12
+GET {{url}}/photos/57
 
 
 ###

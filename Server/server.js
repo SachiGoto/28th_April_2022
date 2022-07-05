@@ -3,15 +3,24 @@ import mysql from 'mysql';
 import cors from 'cors';
 import multer from 'multer';
 // import { resolveShowConfigPath } from '@babel/core/lib/config/files';
-
+import 'dotenv/config';
 import fs from 'fs';
 
+// const db = mysql.createConnection({
+//        host:'localhost',
+//        port:8889,
+//        user:'root',
+//        password:'root',
+//        database:'PhotoGallery'
+
+// })
+
 const db = mysql.createConnection({
-       host:'localhost',
-       port:8889,
-       user:'root',
-       password:'root',
-       database:'PhotoGallery'
+  host: process.env.DBHOST,
+  port: process.env.DBPORT,
+  user: process.env.DBUSER,
+  password: process.env.DBPASSWORD,
+  database: process.env.DBDATABASE
 
 })
 
@@ -73,7 +82,7 @@ server.post('/upload', fileupload.single("file_fromC"),(req, res)=>{
 // This tells node to apply json format to all data
 
 server.get('/photos/:photoid', (req, res)=>{
-  let query = "CALL `photoById`(?);";
+  let query = "CALL `getPhotoById`(?);";
   db.query(query, [req.params.photoid], (error, photo)=>{
     if(error){
       res.json({photo:false, message:error})
