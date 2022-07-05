@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Crud} from '../interfaces/crud.interface';
+import { environment } from 'src/environments/environment';
 
 interface Login{
   login:boolean;
@@ -25,11 +26,19 @@ interface Login{
 export class CommonService {
 
 
-
+private server = environment.server;
 
   constructor(private http:HttpClient) { }
 
-  private deleteCrudURL = "http://localhost:4400/deletcrud";
+  private deleteCrudURL = this.server + "deletcrud";
+  private crudUpdateURL = this.server + "updateCrud";
+  private crudCreateURL = this.server + "newCrudData";
+  private crudURL = this.server + "allCrudData";
+  private loginURL= this.server + "login";
+  private signUpURL = this.server + "signUp";
+  private userURL = this.server + "user";
+  private updateURL = this.server + "updateUser";
+  private deleteURL = this.server + "deleteuser";
 
   deleteCrud(id:any){
     return this.http.delete<{deletedata:boolean, message:any}>(this.deleteCrudURL + "/" + id);
@@ -38,7 +47,7 @@ export class CommonService {
   // private crudDataById = "http://localhost:4400/updateCrud/:id"
 
 
-  private crudUpdateURL = "http://localhost:4400/updateCrud";
+
   updateCrud(id:string, input:string){
     let updateCrudBody ={
       "id":id,
@@ -59,7 +68,7 @@ export class CommonService {
 
 
 
-  private crudCreateURL = "http://localhost:4400/newCrudData";
+
 
 
   createCrudData(input:string){
@@ -73,7 +82,6 @@ export class CommonService {
   }
 
 
-  private crudURL = "http://localhost:4400/allCrudData";
   displayAllCrud(){
     return this.http.get<Crud[]>(this.crudURL);
   }
@@ -83,7 +91,7 @@ export class CommonService {
 
 
 
-  private loginURL= "http://localhost:4400/login";
+
   loginService(email:string, password:string){
     let loginBody={
       email: email,
@@ -98,7 +106,7 @@ export class CommonService {
   }
 
 
-  private signUpURL = "http://localhost:4400/signUp";
+
 
   signUpService(user_name:string, email:string, password:string){
     let signUpBody={
@@ -115,7 +123,7 @@ export class CommonService {
     // this will be returned as observable
   }
 
-private userURL = "http://localhost:4400/user";
+
 
 getUser(id:any){
   return this.http.get<{user: boolean, message:string, userData:[{ UserID:number, email:string, password:string}]}>(this.userURL + "/" + id);
@@ -134,7 +142,7 @@ getUser(id:any){
 // }
 
 
-private updateURL = "http://localhost:4400/updateUser";
+
 // neeed to match with the end point
 updateUser(id:any, email:string, password:string){
     let updateBody={
@@ -153,7 +161,7 @@ updateUser(id:any, email:string, password:string){
 
 
 
-private deleteURL = "http://localhost:4400/deleteuser";
+
 
 
 

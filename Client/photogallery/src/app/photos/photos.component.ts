@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 // import { title } from 'process';
 import { Photo } from '../interfaces/photo.interface';
 import { PhotoserviceService } from '../services/photoservice.service';
@@ -11,7 +12,8 @@ import { PhotoserviceService } from '../services/photoservice.service';
 export class PhotosComponent implements OnInit {
 
   photos:Photo[]=[];
-
+  name_of_env = environment.name;
+  server = environment.server;
 
   deletePhoto(id:number, photocard:HTMLElement){
     if(confirm("Are you sure you want to delte?")){

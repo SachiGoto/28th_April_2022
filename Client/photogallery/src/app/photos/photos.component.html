@@ -5,7 +5,7 @@
 
 <div class="album py-5 bg-light">
   <div class="container">
-
+     ({{name_of_env}})
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <div class="col" *ngFor="let photo of photos"   >
 
@@ -17,6 +17,8 @@
                 <!-- <img src="https://via.placeholder.com/150/92c952"/> -->
               </div>
             <img [src]="'http://localhost:4400/' + photo.url" class="image">
+            <!-- <img [src]="server + photo.url" class="image"> -->
+
             <p class="card-text"> {{photo.title}}</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
